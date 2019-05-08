@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1>Practical Exercise - Walkthrough</h1>
+<h4>Since we are going to be working with Excel, the first step will be adding an <strong>Excel Application Scope </strong>and reading data from the sheet.</h4>
+<ul><li>
+<p>Find and add an <strong>Excel Application Scope </strong>activity<strong>&nbsp;</strong>to the <strong>Main</strong>&nbsp;panel.</p>
+<ul><li>
+<p>Insert&nbsp;the path of the downloaded .xlsx file in the <strong>WorkbookPath</strong> property field.</p>
+</li>
+</ul></li>
+<li>
+<p>Find and add a <strong>Read Range</strong> activity inside the <strong>Do</strong> container of the <strong>Excel Application Scope</strong>.</p>
+<ul><li>
+<p>Insert a new DataTable variable, called <em>valuesTable</em>, in the DataTable property field.</p>
+</li>
+<li>
+<p>Make sure that the <strong>AddHeaders</strong>&nbsp;check box is selected.</p>
+</li>
+</ul></li>
+</ul><p>Since the data is organized in a spreadsheet, a loop will be needed to iterate through each row.</p>
+<ul><li>
+<p>Find and add a <strong>For Each Row</strong> activity below the <strong>Read Range </strong>activity.</p>
+<ul><li>
+<p>Set the <strong>DataTable</strong> to be looped through as <em>valuesTable</em><strong>.</strong>This is how&nbsp;the workflow should look so far:</p>
+</li>
+</ul></li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/14_1.png" alt="" width="362" height="549"></p>
+<p>We’re going to use two Try Catch activities to check Cash In and Cash Out, and assign a variable result which holds the value we will write on that row.</p>
+<ul style="list-style-type:disc;"><li>Create two Int32 variables called <em>cashIn</em> and <em>cashOut.</em><br><br></li>
+<li>Create a GenericValue variable called result. Since it’s a GenericValue type, it can hold either the result of subtracting two integers, or it can hold a string alerting us that one of the values was incorrect.</li>
+</ul><ul><li>
+<p>Find and add a <strong>Try Catch </strong>activity in the&nbsp;<strong>Body</strong> section of the <strong>For each row</strong>&nbsp;activity.</p>
+<ul><li>
+<p>This will catch exceptions if the Cash In is not a valid number.</p>
+</li>
+</ul></li>
+<li>
+<p>Find and add an <strong>Assign </strong>activity into the <strong>Try</strong> portion of the <strong>Try Catch</strong>.</p>
+<ul><li>
+<p>It should assign <em>cint(row("Cash In"))</em> to <em>cashIn</em>.</p>
+<ul><li>
+<p>This converts the cell value in the Cash In column of the current row to an integer and assigns it to <em>cashIn</em>.</p>
+</li>
+<li>
+<p>If there is an exception (if the value is not a number), it will be caught in the <strong>Catch</strong> section.</p>
+</li>
+</ul></li>
+<li>
+<p>Click on <strong>Add new catch</strong> at the bottom of the activity.</p>
+<ul style="list-style-type:disc;"><li>
+<p>Select <strong>System.Exception</strong> in the drop-down (search for it if it is not there).</p>
+</li>
+<li>
+<p>Add an Assign activity into the exception area</p>
+</li>
+<li>
+<p>Set the <strong>To</strong> to <em>result.</em></p>
+</li>
+<li>
+<p>Set the <strong>Value</strong> to “Cash In wrong”.</p>
+</li>
+</ul></li>
+</ul></li>
+</ul><p style="text-align:center;"><img src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/14_2.png" alt="" width="316" height="311"></p>
+<ul><li>
+<p>Click back on the <strong>Try</strong> section: find and add another <strong>Try Catch</strong> below the <strong>Assign </strong>activity.</p>
+<ul><li>
+<p>This one will <em>try</em> the <em>cash out</em> values and catch them differently.</p>
+</li>
+</ul></li>
+<li>
+<p>Add an <strong>Assign</strong> activity inside the <strong>Try </strong>section.</p>
+<ul><li>
+<p>It should assign <em>cint(row("Cash Out"))</em> to <em>cashOut</em>.</p>
+</li>
+</ul></li>
+<li>
+<p>Find and add another <strong>Assign </strong>activity</p>
+<ul><li>
+<p>If the robot hasn’t thrown an error by this point, both Cash In and Cash Out are valid numbers.</p>
+</li>
+<li>
+<p>Set the <strong>To</strong> to <em>result.</em></p>
+</li>
+<li>
+<p>&nbsp;Set the <strong>Value</strong> as "<em>cashIn</em> - <em>cashOut</em>", the difference between the two numbers.</p>
+</li>
+</ul></li>
+<li>
+<p>For the <strong>Catch </strong>section of this <strong>Try Catch</strong>, add another <strong>System.Exception</strong>.</p>
+<ul><li>
+<p>Add an&nbsp;<strong>Assign&nbsp;</strong>in the <strong>Exception</strong> field.</p>
+<ul><li>
+<p>Set the<strong>&nbsp;To </strong>to <em>result.</em></p>
+</li>
+<li>
+<p>Set the&nbsp;<strong>Value</strong>&nbsp;as&nbsp;“<em>Cash out wrong”</em>.</p>
+</li>
+</ul></li>
+</ul></li>
+</ul><p>In the <strong>Finally</strong> block of a <strong>Try-Catch</strong> activity are the steps that the robot will take regardless of whether the <strong>Try</strong> block or the <strong>Catch</strong> one was executed. This workflow is where the robot updates the DataTable with the result, which was calculated by the <strong>Try-Catch</strong> activities.</p>
+<ul><li>Click on the <strong>Finally</strong>&nbsp;section of the outer <strong>Try Catch</strong> activity.&nbsp;</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_12_practice_1_walkthrough_from_gdrive.png" alt="" width="197" height="483"></p>
+<ul><li>Drag an <strong>Assign</strong> into the <strong>Finally</strong> block&nbsp;
+<ul><li>
+<p>Set&nbsp;the <strong>To</strong> field&nbsp;to <em>row("Difference").</em></p>
+</li>
+<li>Set the <strong>Value</strong> to&nbsp;<em>result.ToString</em>.</li>
+</ul></li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_12_practice_1_walkthrough_from_gdrive_2.png" alt="" width="273" height="192"></p>
+<p>&nbsp;</p>
+<p>For the finishing touch, write the processed DataTable back to the Excel file.</p>
+<ul><li>Drag a <strong>Write Range</strong> activity after the entire <strong>For-Each</strong> loop<br><ul><li>Set the <strong>Data table</strong> to <em>valuesTable</em><br><br></li>
+</ul></li>
+</ul><p>Your finished workflow should look like this:</p>
+<p>&nbsp;</p>
+<p style="text-align:center;"><img src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_12_practice_1_walkthrough_from_gdrive_3.png" alt="" width="215" height="690"></p>
+<p style="text-align:left;">&nbsp;</p></body></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1>Practical Exercise - Walkthrough</h1>
+<h5>Change the variable names to meaningful ones:</h5>
+<ul><li>
+<p><em>H</em> could be for example changed to <em>Name</em>.</p>
+</li>
+<li>
+<p><em>Dd </em>should be <em>PhoneNumber</em>.</p>
+</li>
+<li>
+<p><em>Dd1 </em>would be better called <em>Email</em>.</p>
+</li>
+<li>
+<p>If the value of the <strong>ArrayRow</strong> property from the <strong>Add Data Row</strong> activity has not been automatically updated, then do it manually.&nbsp;</p>
+</li>
+</ul><p>Put the recording part in a separate workflow:</p>
+<ul><li>
+<p>This is easiest done by rightclicking the <strong>Attach Window</strong> container and choosing the&nbsp;<strong>Extract as Workflow</strong>&nbsp;option.</p>
+</li>
+<li>
+<p>Note that&nbsp;the <em>Name</em>, <em>PhoneNumber </em>and <em>Email&nbsp;</em>variables have been automatically created as Arguments of type <strong>Out</strong> for the new generated workflow as this new file does not receive any inputs, but is supposed to return back to the <strong>Main</strong> workflow the data fields extracted from the web.</p>
+</li>
+<li>
+<p>In the main workflow, the sequence has been replaced by an&nbsp;<strong>Invoke Workflow</strong> activity which targets the new workflow.</p>
+<ul><li>Click <strong>Import Arguments</strong> and in the <strong>Value</strong> field for each argument, enter the corresponding variable.</li>
+</ul></li>
+</ul><p style="text-align:center;"><img src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/13_1.png" alt="" width="647" height="186"></p>
+<p>Create a loop in the main workflow and invoke the newly created workflow inside of it. Since we want to execute it 5 times, an appropriate choice would be a <strong>While</strong> or<strong> Do While</strong> loop.</p>
+<ul><li>
+<p>after you drag the <strong>While</strong> activity to the workflow,&nbsp;using the <strong>Variables Panel</strong>, create an <strong>Int32</strong> variable with 1 as the default value, so we can use it as a counter.</p>
+</li>
+<li>
+<p>use the previously created variable to set a <strong>Condition</strong> for the <strong>While</strong> activity, such as&nbsp;<em>counter &lt; 6.</em></p>
+</li>
+</ul><ul><li>
+<p>you can drag the previously generated <strong>Invoke Workflow</strong> activity to the project.</p>
+</li>
+<li>
+<p>The <strong>Add Data Row</strong> activity should be moved to the new loop, as we want to execute it 5 times, and placed after the<strong> Invoke Workflow</strong> activity.</p>
+</li>
+<li>
+<p>Don’t forget to increment the counter at the end of the loop, so you can keep track of&nbsp;how many rows have been added to the Data Table.</p>
+<ul><li>Use&nbsp;an <strong>Assign</strong> activity and&nbsp;setting the value of the counter to its own (previous)+1.</li>
+</ul></li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/13_2.png" alt="" width="441" height="506"></p>
+<p>However, the<strong> Build Data Table </strong>activity should be executed only once, so we have to keep it before the <strong>While </strong>loop.</p>
+<p>Similarly, we want to write the resulted table with 5 rows to Excel only once, after collecting all the data. As a result, we should place&nbsp;the <strong>Write Range</strong>&nbsp;activity (and its <strong>Excel Application Scope</strong> container) after the <strong>While </strong>loop.</p>
+<p>Additionally, we have to write all the people's names in the same file, called people.xlsx. To do this, type the name of this file in the <strong>Workbook Path</strong> property of the <strong>Excel Application Scope</strong> activity.</p>
+<ul><li>
+<p>preferably the name would be kept in a String variable to be easily changed.</p>
+<p>As the filename doesn’t depend on the actual person's name and we don’t need the <em>Name</em>, <em>PhoneNumber </em>and <em>Email&nbsp;</em>variables outside the Recording Sequence, we can restrict their scope to the Sequence inside the <strong>While</strong> loop.</p>
+</li>
+</ul></body></html>

@@ -1,0 +1,58 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1>Practical Exercise - Walkthrough</h1>
+<p>This may seem like a tough exercise due to the constraints, but luckily, Studio's <strong>Citrix Recorder</strong> makes it very simple.</p>
+<ul><li><strong>Download </strong>and <strong>open</strong> the <strong>ExpenseIt</strong> executable.</li>
+<li>On the Design tab <strong>navigate </strong>to the <strong>Recording</strong> button on the navigation menu and select <strong>Citrix Recorder</strong>.</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/s6_e2_w_2.png" alt="" width="442" height="135"></p>
+<p>Filling in form fields like those on <strong>ExpenseIt</strong> can be done with image or text recognition. For the first field, let's use <strong>Click Text</strong>.</p>
+<ul><li>Select <strong>Click Text</strong> and select a box around the <strong>Email:</strong> label.</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/s6_e2_w_3.png" alt="" width="260" height="28"></p>
+<ul><li>When the <strong>Screen Scraping Wizard</strong> appears, navigate to the <strong>Search Text</strong> field and type in <strong>Email</strong>.</li>
+<li>Click <strong>Set mouse position</strong> and then <strong>Indicate a point</strong> and click inside the text box next to the email label.</li>
+<li>Set the OCR engine to <strong>Microsoft OCR</strong> and click <strong>Finish</strong>.</li>
+<li>On the recorder menu, select <strong>Type</strong>.</li>
+<li>Use the entire ExpenseIt window as the element selection.</li>
+<li>Type in: <strong><a href="mailto:training@uipath.com">training@uipath.com</a></strong></li>
+<li>Check the Empty field, and hit enter</li>
+</ul><p>For the employee number, let’s use image recognition.</p>
+<ul><li>On the recorder menu, select <strong>Click Image</strong>.</li>
+<li>Select a tight box around the label <strong>Employee Number</strong> and click <strong>Indicate a point</strong>.</li>
+<li>Click somewhere inside the <strong>Employee Number</strong> field.</li>
+<li>Select <strong>Type</strong> and perform the same steps as above.</li>
+<li>The text can be something like: <strong>45321</strong>.</li>
+</ul><p>For Cost Center, use image recognition just like you did for employee number click in the dropdown menu and expand it.</p>
+<ul><li>Next, select <strong>Click Text</strong> and use the entire window as the selection element (simulating a citrix environment).</li>
+<li>In the <strong>Search Text</strong> field, type: <strong>Marketing</strong>.</li>
+<li>Set the OCR engine to Google for this one.</li>
+<li>For <strong>Employees</strong>, select <strong>Click Text</strong> again.</li>
+<li>Use the entire window as the selection area again.</li>
+<li>In the <strong>Text to be found</strong> field, type: <strong>CSG</strong>.</li>
+<li>Use Microsoft OCR for this one.</li>
+<li>Do the same steps for selecting an employee name, this time selecting the text: <strong>Amy</strong>.</li>
+<li>Select <strong>Click Image</strong> and select an area around the text on the <strong>Create Expense Report</strong> button</li>
+<li>Click <strong>Save &amp; Exit</strong> and verify that all Microsoft and Google OCR engines used use the <strong>Legacy</strong> profile</li>
+</ul><p>All of the text inputs can be replaced with variables for more flexibility. This is what the final workflow should look like:<br><br></p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/32879/7_1_1.png" alt="" width="400" height="457"></p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/32879/7_1_2.png" alt="" width="400" height="460"></p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/32879/7_1_3.png" alt="" width="400" height="348"></p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/32879/7_1_4.png" alt="" width="400" height="440"></p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/32879/7_1_5.png" alt="" width="400" height="221"></p>
+<p><br><br></p></body></html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1>Practical Exercise - Walkthrough</h1>
+<h5>As the workflow contains&nbsp;business decisions and multiple nested <strong>If activities, a</strong>&nbsp;flowchart would be more appropriate instead of a sequence.</h5>
+<p>You need to create a flowchart, replace each <strong>If</strong> activity with a <strong>Decision one&nbsp;</strong>and keep all other pieces in the same place.</p></body></html>

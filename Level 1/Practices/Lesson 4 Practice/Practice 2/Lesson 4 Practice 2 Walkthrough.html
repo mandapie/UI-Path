@@ -1,0 +1,107 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1>Practical Exercise - Walkthrough</h1>
+<h5>First, add an <strong>Input Dialog </strong>activity and fill it in with the proper parameters.</h5>
+<ul><li>
+<p>Find and add an <strong>Input Dialog </strong>activity to the Main panel.</p>
+<ul><li>
+<p>Enter ‘<strong>Get the Temperature</strong>’ as the title (remember to surround it in quotation marks).</p>
+</li>
+<li>
+<p>Enter ‘<strong>Enter a city name</strong>’ as the label.</p>
+</li>
+<li>
+<p>Create a string or generic variable called <strong>city</strong> and enter it as the output.</p>
+</li>
+</ul></li>
+</ul><p>The recorder can be used to simplify the process of creating the main part of the sequence.</p>
+<ul><li>
+<p>Open a browser and navigate to google.com (Internet Explorer recommended)</p>
+</li>
+<li>
+<p>In the <strong>Design</strong> tab, select <strong>Recording</strong> &gt; <strong>Web</strong>. The <strong>Web Recording</strong> toolbar is displayed.</p>
+</li>
+<li>
+<p>Click <strong>Open Browser</strong> and indicate the opened browser.</p>
+<ul><li>
+<p>Make sure to exclude the browser window bar at the top.</p>
+</li>
+<li>
+<p>The recorder should prompt you to confirm the URL.</p>
+</li>
+</ul></li>
+<li>
+<p>Click <strong>Type </strong>and select the Google search bar.</p>
+<ul><li>
+<p>Type ‘<strong>weather in new york</strong>’ and press the <strong>Enter</strong> key to record it.</p>
+</li>
+</ul></li>
+<li>
+<p>From the <strong>Type </strong>menu, select <strong>Send Hotkey</strong>.</p>
+<ul><li>
+<p>Select the browser area again (excluding the top window bar).</p>
+</li>
+<li>
+<p>From the dropdown, select <strong>enter</strong>.</p>
+</li>
+</ul></li>
+<li>
+<p>From the <strong>Text</strong> menu, select <strong>Scrape</strong>&gt; <strong>Screen Scraping</strong>.</p>
+<ul><li>
+<p>Using the element selector, click the temperature numbers.</p>
+</li>
+</ul></li>
+<li>
+<p>From the <strong>Open Browser </strong>menu, select <strong>Close Browser </strong>and indicate the browser area to close.</p>
+</li>
+<li>
+<p>Click <strong>Save &amp; Exit</strong></p>
+</li>
+<li>
+<p>This is what the recorded sequence should look like:</p>
+</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/sess_3___walkthrough_2_1.jpg" alt="" width="440" height="966"></p>
+<p>The final part involves modifying the input of the search to match the user’s city, the outputs of the scraped temperature, as well as adding a message box to display the temperature.</p>
+<ul><li>
+<p>Navigate to the <strong>Type Into</strong> inside the <strong>Do </strong>container.</p>
+<ul><li>
+<p>Replace “<strong>weather in new york</strong>” with "’“weather in “ + <strong>city</strong><strong>"</strong><strong>’</strong>.</p>
+</li>
+</ul></li>
+<li>
+<p>Navigate to the <strong>Get Full Text </strong>activity below the <strong>Send Hotkey</strong> one.</p>
+<ul><li>
+<p>Create a generic or string variable called <strong>temperature </strong>and use it as the output parameter.</p>
+</li>
+</ul></li>
+<li>
+<p>Add a <strong>Message Box</strong> activity to the end of the workflow.</p>
+<ul><li>
+<p>For the text parameter, type: “The weather in “ + <strong>city</strong> + “ is: “ + <strong>temperature</strong> + “ degrees”.</p>
+<ul><li>
+<p>This concatenates user-friendly sentence fragments with the corresponding values that were extracted as variables.</p>
+</li>
+</ul></li>
+</ul></li>
+<li>
+<p>This is what the final workflow should look like when compressed:</p>
+</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/sess_3___walkthrough_2_2.jpg" alt="" width="340" height="410"></p>
+<p>&nbsp;</p></body></html>

@@ -1,0 +1,102 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1>Practical Exercise - Walkthrough</h1>
+<h2>Part A:</h2>
+<h5>Practically all of the activities to be done should be contained inside an <strong>Excel Application Scope.</strong> The first step after creating one of those is to read the Excel file.</h5>
+<ul><li>Find and add an <strong>Excel Application Scope</strong> to the main area</li>
+</ul><p>o Type in the full workbook path to <strong>Sample Columns.xlsx</strong> into the Workbook Path parameter</p>
+<p>o Make sure the ‘Visible’ option is checked, so the activities will be performed just like a human</p>
+<ul><li>Find and add a <strong>Read Range </strong>activity into the <strong>Do </strong>container of the <strong>Excel Application Scope</strong>.</li>
+</ul><p>o Set the Range to “” so the entire sheet is read</p>
+<p>o In the output parameter, use the shortcut Ctrl+K to create a DataTable called <strong>inputsTable</strong></p>
+<ul><li>This is what the workflow should look like so far:</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/s8_e2_w_1.png" alt="" width="438" height="421"></p>
+<p>Next, use a <strong>For Each Row</strong> activity and sum the first two columns.</p>
+<ul><li>Find an add a <strong>For Each Row </strong>activity and add it below the <strong>Read Range </strong>activity</li>
+</ul><p>o Set it to loop through the DataTable created earlier, <strong>inputsTable</strong></p>
+<ul><li>Create an Int32 variable called <strong>rowIndex</strong> - this will keep track of what row to write on later</li>
+<li>Find and add an <strong>Assign </strong>activity inside the body of the <strong>For Each Row</strong> activity</li>
+</ul><p>o Assign <strong>inputsTable.Rows.IndexOf(row) +1</strong> to <strong>rowIndex</strong></p>
+<p>▪ This sets the value of rowIndex to the match the current row in the loop</p>
+<p>▪ The + 1 is because Excel Rows start counting at 1, whereas DataTables start at an index of 0 - this difference needs to be compensated for</p>
+<ul><li>Below that activity, find and add two <strong>Get Row Item</strong> activities</li>
+</ul><p>o For the first one, set the column index to 0 and the row to <strong>row </strong>(the temporary loop variable)</p>
+<p>o In the output parameter, use the Ctrl+K shortcut to create a variable called <strong>valueA</strong></p>
+<p>o For the second one, set the column index to 1 and the row to <strong>row</strong></p>
+<p>o In the output parameter, use the Ctrl+K shortcut to create a variable called <strong>valueB</strong></p>
+<ul><li>Find and add an <strong>Assign </strong>activity below</li>
+</ul><p>o Assign <strong>valueA + valueB </strong>to <strong>valueC </strong>(Use the variable creation shortcut here as well)</p>
+<ul><li>Find and add a <strong>Write Value</strong> activity next</li>
+</ul><p>o Keep the sheet as Sheet1</p>
+<p>o Set the range (the location in the sheet to write to) to <strong>“C” + rowIndex</strong>.<strong>ToString</strong></p>
+<p>▪ Throughout the loop, this will evaluate to “C1” then “C2,” and so on down the third column</p>
+<p>o Set the value to <strong>valueC</strong></p>
+<ul><li>This is what the final workflow should look like:</li>
+</ul><p>&nbsp;</p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/179791/s8_e2_w_5_1.png" alt="" width="351" height="528"></p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/179791/s8_e2_w_5_2.png" alt="" width="351" height="501"></p>
+<h2>Part B:</h2>
+<p>In this part, the file will be read without an <strong>Excel Application Scope</strong> because the automation will be done internally.</p>
+<ul><li>Find and add a <strong>Read Range </strong>activity into the main sequence.</li>
+</ul><p>o Set the WorkBook path to the full path of the <strong>Sample Columns.xlsx</strong> workbook</p>
+<p>o Set the Range to “” so the entire sheet is read</p>
+<p>o In the output parameter, use the shortcut Ctrl+K to create a DataTable called <strong>inputsTable</strong></p>
+<ul><li>Find and add an <strong>Add Data Column </strong>activity below</li>
+</ul><p>o Set the ColumnName to “C”</p>
+<p>o Set the DataTable parameter to <strong>inputsTable</strong></p>
+<p>o Set the argument type to object</p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/s8_e2_w_4.png" alt="" width="341" height="276"></p>
+<ul><li>Find and add a <strong>For Each Row </strong>activity below that</li>
+</ul><p>o Set the activity to loop through <strong>inputsTable</strong></p>
+<ul><li>Find and add two <strong>Assign </strong>activities (necessary variables should be created with the shortcut):</li>
+</ul><p>o The first one assigns <strong>row(0).ToString </strong>to <strong>valueA</strong></p>
+<p>o The second one assigns <strong>row(1).ToString </strong>to <strong>valueB</strong></p>
+<p>▪ These convert the row object values to more usable string values</p>
+<ul><li>Find and add another <strong>Assign</strong> activity that assigns to <strong>row(2) </strong>this value:</li>
+</ul><p>o <strong>Integer.Parse(valueA) + Integer.Parse(valueB)</strong></p>
+<p>o This statement converts the string values to integer values using a Visual Basic method and then adds them together</p>
+<ul><li>Lastly, find and add a <strong>Write Range</strong> activity below and outside the <strong>For Each</strong> activity - this will be writing the manipulated DataTable to a new sheet.</li>
+</ul><p>o Set the DataTable to <strong>inputsTable</strong></p>
+<p>o The sheet name should remain as Sheet1</p>
+<p>o The starting cell should be left blank, as “”</p>
+<p>o Set the workbook path to a desired path that ends with the file name <strong>Sample Columns - Completed.xlsx</strong></p>
+<p>▪ UiPath will create a new file if this one doesn’t already exist</p>
+<ul><li>This is what the rest of the completed workflow should look like:</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/20181/capture_jpg_sumb.jpg" alt="Sum B - Lesson 9 - Exercise 1" width="380" height="1069"></p>
+<p>&nbsp;</p>
+<h2>Part C:</h2>
+<h5>This part is mostly a matter of using an Excel command for the rows that need adding. It should be completely contained in an <strong>Excel Application Scope</strong>.</h5>
+<ul><li>Find and add an <strong>Excel Application Scope </strong>activity and add it to the main sequence</li>
+</ul><p>o As usual, set the path of <strong>Sample Columns.xlsx</strong></p>
+<p>o Set the visibility option on by checking the box</p>
+<ul><li>Find and add a <strong>Read Range </strong>activity</li>
+</ul><p>o The sheet should remain as Sheet1</p>
+<p>o Set the output to a newly created DataTable called <strong>inputsTable</strong></p>
+<p>Count how many rows there are so the formulas can be applied to the proper section of the sheet.</p>
+<ul><li>Find and add an <strong>Assign </strong>activity below the <strong>Read Range </strong>activity</li>
+</ul><p>o Assign <strong>inputsTable.Rows.Count</strong> to a newly created generic variable called<strong> rowsCount</strong></p>
+<ul><li>Find and add a <strong>Write Value </strong>activity, it should be set to:</li>
+</ul><p>o Write on Sheet1</p>
+<p>o Write in the range from “C1:C” + rowsCount</p>
+<p>▪ This sets the range of rows in Column C to write the formula in</p>
+<p>o Write the value “=SUM(A1,B1)”</p>
+<p>▪ In Excel, this value will automatically iterate through the descending rows</p>
+<ul><li>This is what the final workflow should look like:</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/s8_e2_w_6.png" alt="" width="441" height="648"></p></body></html>

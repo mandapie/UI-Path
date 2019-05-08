@@ -1,0 +1,46 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1>Practical Exercise - Walkthrough</h1>
+<h5>Create a new Flowchart and call it <strong>Simple Flow Decision.</strong></h5>
+<p>Drag a <strong>Message Box</strong> activity below the start node. Fill in the <strong>Message</strong> property field with the mathematical question (e.g. 1 + 1 = 2 ?)</p>
+<ul><li>Set the <strong>Buttons</strong> property to <strong>YesNo</strong>.</li>
+<li>Create an output variable called <em><strong>answer</strong> </em>to capture the user’s choice</li>
+</ul><p><span style="font-size:12pt;color:#808080;">Find a&nbsp;<strong>Flow Decision</strong>&nbsp;activity in the <strong>Activities Panel</strong> and drag it below the <strong>Message Box</strong>. We are going to make our decision based on the user’s answer.</span></p>
+<p style="text-align:center;"><img src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/sess_2____walkthrrough_1_1.jpg" alt="" width="187" height="262">&nbsp; &nbsp; &nbsp;&nbsp;<img src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/sess_2____walkthrrough_1_2.jpg" alt="" width="324" height="123"></p>
+<p style="text-align:left;">&nbsp;</p>
+<p style="text-align:left;">Create a variable called resultText, which will be used to hold the String that the robot types into Notepad.</p>
+<p style="text-align:left;"><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_2___ex__1___1.png" alt="" width="624" height="144"></p>
+<p><span style="font-size:12pt;color:#808080;">Drag two Assign activities to the flowchart under each branch of the flow decision. In the True branch, assign resultText to “Correct”. In the False branch, assign resultText to “Incorrect”.</span></p>
+<p><span style="font-size:12pt;color:#808080;">Next, we are going to use a <strong>Sequence</strong> within this <strong>Flowchart</strong>, so find and drag a <strong>Sequence</strong> from the <strong>Activities Panel</strong>&nbsp;into the <strong>Main</strong> window and double click it to view its contents.</span></p>
+<p><span style="font-size:12pt;color:#808080;">Once opened, find and drag an&nbsp;<strong>Open Application</strong> activity into the sequence. Now we must indicate the application that is to be&nbsp;opened. There are two ways in which you can do this. The simplest way to do this is to have Notepad opened on your desktop, click the <strong>Indicate window on screen</strong>&nbsp;button in the <strong>Open Application</strong> activity, then click on the Notepad window.</span></p>
+<p style="text-align:left;"><br><span style="font-size:12pt;color:#808080;">An alternative way is to enter the full path of the executable file into the <strong>FileName</strong> parameter of the <strong>Open Application</strong>&nbsp;activity, as shown below. The full path in this instance would be <strong>C:\Windows\System32\notepad.exe</strong>&nbsp;(remember that all the strings have to be placed between quotation marks).</span></p>
+<p style="text-align:left;">&nbsp;</p>
+<p style="text-align:left;"><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/sess_2____walkthrrough_1_3.jpg" alt="" width="362" height="602"></p>
+<p style="text-align:left;"><span style="font-size:12pt;color:#808080;">&nbsp;</span></p>
+<p style="text-align:left;"><span style="font-size:12pt;color:#808080;">Drag an <strong>Attach Window</strong> activity after <strong>Open Application</strong>. As before, make sure Notepad is opened on your desktop, click the <strong>Indicate window on screen</strong> button in the <strong>Attach Window activity</strong>, and then select the Notepad window.</span></p>
+<p style="text-align:left;"><span style="font-size:12pt;color:#808080;"><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_2___ex__1___2.png" alt="" width="334" height="432"></span></p>
+<p>Next, find and drag a <strong>Type Into </strong>activity into the <strong>Do</strong> container of the <strong>Attach Window</strong> activity. If there is a specific area within the window where we want to type, we have to indicate the element again. However, in this case, this is not necessary. The input text of the Type Into activity is the resultText variable.</p>
+<p style="text-align:left;">Finally, add a <strong>Close Application </strong>activity at the end of the sequence to exit Notepad. Once again, identify it in the <strong>Activities Panel</strong> and drag it to your workflow, below the other activities. The target application has to be indicated again, so we must follow the same steps as before. Now we have a complete sequence!</p>
+<p style="text-align:left;">&nbsp;</p>
+<p style="text-align:left;"><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_2___ex__1___3.png" alt="" width="391" height="726"></p>
+<p>&nbsp;</p>
+<p>Back in the main flowchart, attach both <strong>Assign</strong> activities to the Write to Notepad sequence. Your finished workflow should look like this:</p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_2___ex__1___4.png" alt="" width="601" height="594"></p>
+<p><span style="font-size:12pt;color:#808080;">Run the workflow. You should see Notepad being opened and then Correct being typed in before the application is closed again (you may need to click <strong>Don’t Save</strong>&nbsp;when the pop up appears during closing).</span></p></body></html>

@@ -1,0 +1,165 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h2><strong>Practical Exercise - Walkthrough</strong></h2>
+<p>&nbsp;<strong>First, UiPath Studio must read the .csv file to retrieve the data.</strong></p>
+<ul><li>
+<p>Place the .csv file downloaded from the previous material in any folder, preferably in the corresponding Studio project folder, for easy navigation.</p>
+</li>
+</ul><ul><li>
+<p>Find and add a <strong>Read CSV</strong> activity to the main sequence.</p>
+<ul><li>
+<p>Enter the path to Members Only.csv in the <strong>FilePath</strong> section of the <strong>Properties Panel</strong>.</p>
+<ul><li>
+<p>If the file is in the project folder, simply type in its name. Otherwise, we have to use the full path.</p>
+</li>
+</ul></li>
+<li>
+<p>Make sure the <strong>IncludeColumnNames</strong> check box is selected, because the “First”, “Last”, and “Club Member” column headers have to be retained.</p>
+</li>
+<li>
+<p>In the <strong>Output</strong> field, use the Ctrl + K command to generate a variable. Type <strong>names </strong>in the field that is displayed.</p>
+<ul><li>
+<p>A variable of the appropriate type is created.</p>
+</li>
+</ul></li>
+</ul></li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_3___ex__1___1.png" alt="" width="266" height="304"></p>
+<ul><li>
+<p>Create a variable in the <strong>Variables </strong>panel, and call it <strong>clubMembers</strong>.</p>
+<ul><li>
+<p>Double click the <strong>Type</strong> section and select <strong>Array of [T]</strong>.</p>
+</li>
+<li>
+<p>In the dropdown menu that appears, select <strong>Browse for types</strong>.</p>
+</li>
+<li>
+<p>In the subsequent variable type menu, search for <strong>DataRow</strong>.</p>
+</li>
+<li>
+<p>Double click the result under System.Data that is named solely <strong>DataRow</strong>.</p>
+</li>
+<li>Click <strong>Ok</strong> to finish creating the array of DataRows.</li>
+</ul></li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_3___ex__1___2.png" alt="" width="460" height="230"></p>
+<ul><li>
+<ul><li>The <strong>Variables</strong> panel should look like this:
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_3___ex__1___3.png" alt="" width="624" height="88"></p>
+</li>
+</ul></li>
+</ul><ul><li>
+<p>Find and add an <strong>Assign </strong>activity below <strong>Read CSV</strong>.</p>
+<ul><li>
+<p>Add the <strong>clubMembers </strong>variable in the<strong> To </strong>field of the activity.</p>
+</li>
+<li>
+<p>In the <strong>Value</strong> field, type <strong>names.Select("[Club Member]= ‘Yes’ ")</strong></p>
+<ul><li>
+<p>We must use [square brackets] with the <strong>Select </strong>method when the column name contains spaces.</p>
+</li>
+</ul></li>
+<li>
+<p>That extracts all the rows where the Club Member field matches the “Yes” string and stores them into the <strong>clubMembers</strong> array variable.</p>
+</li>
+</ul></li>
+</ul><ul><li>
+<p>This is what the workflow should look like:</p>
+</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_3___ex__1___4.png" alt="" width="280" height="234"></p>
+<p>&nbsp;</p>
+<p>Create nicknames from all the filtered names in the array of rows by using a loop, String methods, and the <strong>Write Line </strong>activity.</p>
+<ul><li>
+<p>Find and add a <strong>For Each</strong> activity below <strong>Assign</strong>.</p>
+<ul><li>
+<p>Set the <strong>TypeArgument</strong> property to <strong>DataRow</strong> in the <strong>Browse for types</strong> window. Add the <strong>clubMembers</strong> variable in the <strong>Values </strong>property field.</p>
+</li>
+<li>
+<p>Rename <strong>item</strong> to <strong>row </strong>for clarity.</p>
+</li>
+</ul></li>
+</ul><ul><li>
+<p>Create two String variables called <strong>firstName</strong> and <strong>lastName</strong></p>
+</li>
+</ul><ul><li>
+<p>Drag an <strong>Assign</strong> activity into the body of the For Each loop.</p>
+<ul><li>
+<p>Add the <strong>firstName</strong> variable in the <strong>To</strong> field of the activity</p>
+</li>
+<li>
+<p>In the <strong>Value</strong> field, type <strong>row("First").ToString</strong></p>
+</li>
+</ul></li>
+<li>
+<p>Drag another <strong>Assign</strong> activity into the body of the For Each loop, after the one we have just created.</p>
+<ul><li>
+<p>This time, add the <strong>lastName</strong> variable in the <strong>To</strong> field of the activity</p>
+</li>
+<li>
+<p>In the <strong>Value</strong> field, type in: <strong>row("Last").ToString</strong></p>
+</li>
+</ul></li>
+</ul><ul><li>
+<p>Now, the sequence should look like this:</p>
+</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_3___ex__1___5.png" alt="" width="282" height="614"></p>
+<p>The next step is to generate the nickname. First, it should extract the first 3 letters of the first name and switch all of them to uppercase. Then it should extract the first 3 letters of the last name and switch them to lowercase. Finally, both parts should be combined together - or <strong>concatenated</strong>.</p>
+<ul><li>
+<p>Create a string called <strong>nickname</strong>.</p>
+</li>
+<li>
+<p>Find and add an <strong>Assign</strong> activity.</p>
+<ul><li>
+<p>In the <strong>To</strong> field, insert the <strong>nickname </strong>variable.</p>
+</li>
+</ul></li>
+</ul><ul><li>
+<p>In the <strong>Value</strong> property field, write the following:</p>
+<ul><li>
+<p><strong>firstName.Substring(0,3).ToUpper </strong>+<strong> lastName.Substring(0,3).ToLower</strong>.</p>
+</li>
+<li>
+<p><strong>firstName.Substring(0,3)</strong> takes a subsection of <strong>firstName</strong>, starting from index 0, of a length of 3 characters.</p>
+</li>
+</ul></li>
+</ul><table style="height:108px;margin-left:auto;margin-right:auto;" width="376"><tbody><tr><td style="text-align:center;">Character</td>
+<td style="text-align:center;">S</td>
+<td style="text-align:center;">a</td>
+<td style="text-align:center;">l</td>
+<td style="text-align:center;">l</td>
+<td style="text-align:center;">y</td>
+</tr><tr><td style="text-align:center;">Index</td>
+<td style="text-align:center;">0</td>
+<td style="text-align:center;">1</td>
+<td style="text-align:center;">2</td>
+<td style="text-align:center;">3</td>
+<td style="text-align:center;">4</td>
+</tr></tbody></table><p>o &nbsp;&nbsp;<strong>.ToUpper</strong> converts the substring to uppercase.</p>
+<p>o &nbsp;&nbsp;Likewise, <strong>lastName.Substring(0,3).ToLower</strong> takes the first 3 characters of the last name as a substring and converts them to lowercase.</p>
+<p>o &nbsp;&nbsp;The <strong>+</strong> operator concatenates, or adds, the substrings together.</p>
+<p>To add the finishing touches, drag a <strong>Write Line</strong> activity that displays the final result into the workflow.</p>
+<ul><li>
+<p>Find the <strong>Write Line</strong> activity and place it into the <strong>For Loop</strong>, under the three <strong>Assign </strong>activities.</p>
+<ul><li>
+<p>In the <strong>Text</strong> field, insert the <strong>nickname </strong>variable.</p>
+</li>
+</ul></li>
+</ul><ul><li>
+<p>This is what the final sequence should look like:</p>
+</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_3___ex__1___6.png" alt="" width="316" height="864"></p></body></html>

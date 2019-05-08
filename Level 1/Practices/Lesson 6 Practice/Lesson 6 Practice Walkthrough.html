@@ -1,0 +1,162 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1>Practical Exercise - Walkthrough</h1>
+<p>&nbsp;</p>
+<h5>First create a blank workflow as a sequence and attach to a browser tab to extract input data. Then, attach to a second browser tab and type into form fields the input data.</h5>
+<ul><li>
+<p>Open Internet Explorer and navigate to <a href="http://www.fakenamegenerator.com">www.fakenamegenerator.com</a></p>
+</li>
+<li>
+<p>Set the following options for the randomly generated identity:</p>
+<ul><li>
+<p>Gender - “Random”</p>
+</li>
+<li>
+<p>Name set - “Brazil”</p>
+</li>
+<li>
+<p>Country - “United States”</p>
+</li>
+</ul></li>
+<li>
+<p>Click on Generate button</p>
+</li>
+<li>
+<p>Find the <strong>Attach Browser </strong>activity and add it to the Main panel</p>
+<ul><li>
+<p>Indicate on screen the FakeNameGenerator tab</p>
+</li>
+<li>
+<p>Check the Selector. The <strong>title </strong>attribute contains the options we set - “Random, Brazil, United States”. To make it work for different options, replace the dynamic part with the <strong>wildcard </strong>character.</p>
+</li>
+<li>
+<p>This is how the selector looks: &lt;html title='Generate a Random Name*' /&gt;</p>
+</li>
+</ul></li>
+<li>
+<p>Next, let’s get the values required.</p>
+</li>
+<li>
+<p>Find a <strong>Get Text</strong> activity and add it inside the Attach Browser scope.</p>
+<ul><li>
+<p>Indicate on screen the randomly generated name.</p>
+</li>
+<li>
+<p>Inspect the generated selector. It is a partial selector because it does not contain the top-level element. The <strong>idx </strong>attribute is used because the target UI element doesn’t have enough specific attributes to make it uniquely identifiable.</p>
+</li>
+<li>
+<p>Let’s try to add other attributes to avoid using the idx attribute.</p>
+</li>
+</ul></li>
+<li>
+<p>Open UiExplorer and indicate the same element.</p>
+<ul><li>
+<p>Include parent element in the selector, add attribute <strong>class </strong>and remove <strong>css-selector</strong>.</p>
+</li>
+</ul></li>
+</ul><p>&nbsp;<img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_6___ex__1___1.png" alt="" width="814" height="651"></p>
+<p>&nbsp;</p>
+<ul><li>
+<ul><li>
+<p>Use the partial selector for the Get Text activity and store the output in a variable called “<strong>name</strong>”.</p>
+</li>
+</ul></li>
+<li>
+<p>Next, use UiExplorer to inspect the selector for <strong>Company </strong>value field.</p>
+<ul><li>
+<p>Idx attribute is used by default, but we should find a better selector.</p>
+</li>
+<li>
+<p>We have the label “Company” and the value we are interested in the right side.</p>
+</li>
+</ul></li>
+<li>
+<p>This is a good case for the <strong>Anch</strong><strong>or Base</strong> activity. Add it inside the Attach Browser scope.</p>
+<ul><li>
+<p>Use a <strong>Find Element</strong> activity as anchor. Indicate on screen the label “<strong>Company</strong>” and inspect the default selector. If it uses idx attribute, we have to use again the UiExplorer to refine the selector by including the <strong>aaname </strong>attribute.</p>
+</li>
+<li>
+<p>The selector should look like this: &lt;webctrl tag='DT' aaname='Company' /&gt;</p>
+</li>
+<li>
+<p>Use a <strong>Get Text</strong> activity for the action and store the output in a variable called “<strong>companyName</strong>”.</p>
+</li>
+<li>
+<p>Optional, you can set the <strong>Anchor Position</strong> to “<strong>Left</strong>” as we know that the anchor (label) will always be in the left side.</p>
+</li>
+</ul></li>
+<li>
+<p>This is how it looks until now:</p>
+</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_6___ex__1___2.png" alt="" width="672" height="398">&nbsp;&nbsp;</p>
+<ul><li>
+<p>The last value that we need to extract, <strong>Phone </strong>number, is similar to the Company name.</p>
+<ul><li>
+<p>Add another Anchor Base activity and use a Find Element as anchor, this time the target should be the label “<strong>Phone</strong>“</p>
+</li>
+<li>
+<p>Add a Get Text activity as the action and store the output in a variable named “<strong>phoneNumber</strong>”.</p>
+</li>
+</ul></li>
+<li>
+<p>Open another tab in Internet Explorer and navigate to <a href="http://www.rpachallenge.com"><strong>www.rpachallenge.com</strong></a></p>
+</li>
+<li>
+<p>Add a second <strong>Attach Browser</strong> activity, after the first one, and indicate on screen the RPA Challenge website.</p>
+</li>
+<li>
+<p>We could use the Anchor Base activity as in previous case, but we can also build a relativ selector for the form fields. Let’s do it this way now.</p>
+<ul><li>
+<p>Open UiExplorer and <strong>Select Target Element</strong> as the First Name input field.</p>
+</li>
+<li>
+<p>Now, use the <strong>Select Relative Element</strong> option and point to the label “First Name”.</p>
+</li>
+<li>
+<p>A relative selector is generated. It first locates the “First Name” label, navigate up one level, to parent element, and then will try to find the Input field. Of course, the “Id” attribute should be removed from the selector, as we know that this is dynamic.</p>
+</li>
+<li>
+<p>This is how the selector looks:</p>
+</li>
+</ul></li>
+</ul><p>&nbsp;<img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_6___ex__1___3.png" alt="" width="778" height="616"></p>
+<p>&nbsp;</p>
+<ul><li>
+<p>Add a <strong>Type Into</strong> activity inside the second attach browser and use this selector. Make sure to skip the first node, as we are inside an attach scope and we should use the partial selector.</p>
+</li>
+<li>
+<p>The Text property of our Type Into activity should contain the variable where we stored the name, called “name”. But first we need to change the scope of that variable, and other as well.</p>
+<ul><li>
+<p>Click inside first attach browser “Do” sequence and expand the Variables panel.</p>
+</li>
+<li>
+<p>Change the Scope of all 3 variables from “Do” to the outer “Sequence”.</p>
+</li>
+</ul></li>
+</ul><p>&nbsp;</p>
+<p>&nbsp;<img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_6___ex__1___4.png" alt="" width="832" height="599"></p>
+<p>&nbsp;</p>
+<ul><li>
+<p>Add two more Type Into activities, one for Company Name and the other for Phone Number and do the same steps as for First Name input.</p>
+</li>
+<li>
+<p>Here is the second Attach Browser:</p>
+</li>
+</ul><p>&nbsp;<img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/lesson_6___ex__1___5.png" alt="" width="543" height="778"></p></body></html>

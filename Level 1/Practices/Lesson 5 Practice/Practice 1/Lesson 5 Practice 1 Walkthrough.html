@@ -1,0 +1,94 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1>Practical Exercise - Walkthrough</h1>
+<h5>The first thing to do after creating a new sequence is to navigate to <a href="https://www.ebay.com/sch/i.html?LH_GD=3&amp;_trkparms=meid_vp%3D0719ff296e9444208f56e895d38d408a&amp;LH_Auction=1&amp;_nkw=laptops&amp;_pgn=2&amp;_skc=50&amp;rt=nc" target="_blank" rel="noreferrer">this page</a> on a compatible browser.</h5>
+<p>Next, using the Web Scraping wizard will guide you through each step of extracting data and will automatically create the necessary activities when completed.</p>
+<ul><li>
+<p>Create a blank sequence workflow</p>
+</li>
+<li>
+<p>Navigate to the Ebay search page on a UiPath-compatible browser (Internet Explorer is recommended for simplicity)</p>
+<ul><li>
+<p>The page should display a search for the term ‘Laptop’</p>
+</li>
+</ul></li>
+</ul><p>Navigate to the top menu and click on <strong>Data Scraping</strong></p>
+<p style="text-align:center;"><strong><img src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13013/s4_e2.png" alt="" width="257" height="111"></strong></p>
+<p>With the Data Scraping wizard open, select the item name as the first field and include the url as well. The second field should be the item price. In total, there should be 3 columns.</p>
+<ul><li>
+<p>Read the instructions and press next</p>
+<ul><li>
+<p>UiPath will now be in element selection mode</p>
+</li>
+</ul></li>
+<li>
+<p>In the internet explorer window, use the element selector to first identify (click on) the first item name in the search list.</p>
+</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/sess__4___walkthrough___1_2.jpg" alt="" width="688" height="186"></p>
+<ul><li>
+<p>Click next and then identify the last item name in the search list (while still on the same page).</p>
+<ul><li>
+<p>Selecting the last item rather than the second one increases the chances of a generating a consistent identifier</p>
+</li>
+</ul></li>
+<li>
+<p>In the next section of the wizard, change the text column name to <strong>Item</strong> and change the URL column name to <strong>Url</strong></p>
+<ul><li>
+<p>Make sure to check the box next to ‘Extract Url’</p>
+</li>
+</ul></li>
+<li>The wizard should look like this when the next button is pressed:</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/13007/sess__4___walkthrough___1_3.jpg" alt="" width="652" height="672"></p>
+<p>The next steps are very similar to the previous ones, except they will be identifying price rather than item name.</p>
+<ul><li>
+<p>Make sure the maximum number of results is set to 100, which it is by default</p>
+</li>
+<li>
+<p>Click on ‘Extract Correlated Data’</p>
+</li>
+<li>
+<p>After clicking next again, identify the price of the first item in the search list</p>
+</li>
+<li>
+<p>Identify the last item’s price as the second element</p>
+</li>
+<li>
+<p>Change the text column name to <strong>Price</strong> and click next to view the data</p>
+</li>
+<li>
+<p>There should be 3 columns, <strong>Item</strong>, <strong>Url</strong>, and <strong>Price</strong>, that are completely filled in</p>
+</li>
+<li>
+<p>Click finish and when prompted about multiple pages, click yes and select the next button at the bottom of the search page</p>
+</li>
+</ul><p>To write the data to an Excel Spreadsheet, the <strong>Write Range</strong> activity (from Workbook activities) must be used.</p>
+<ul><li>
+<p>Find and add a <strong>Write Range </strong>activity below the <strong>Attach Browser </strong>container but inside the <strong>Data Scraping </strong>container</p>
+</li>
+<li>
+<p>For the file path parameter, type in ‘Laptops.xlsx’ - this designates the name of the file to be written on</p>
+<ul><li>
+<p>Since that file doesn’t exist, UiPath will automatically create one with that name</p>
+</li>
+</ul></li>
+<li>
+<p>For the data table parameter, use the automatically created variable <strong>ExtractDataTable</strong></p>
+</li>
+</ul><p style="text-align:center;"><strong><img src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/55184/lesson5_practice1_walkthrough_line75.png" alt="" width="465" height="641"></strong></p></body></html>
