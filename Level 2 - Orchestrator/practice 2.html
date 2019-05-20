@@ -1,0 +1,44 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1 style="color:#2f549c;font-size:28px;font-family:Lato, sans-serif;">Register your robot to Orchestrator</h1>
+<p>&nbsp;</p>
+<h3>The following is a one time action, for each individual robot. It does not apply to&nbsp;Floating Robots:</h3>
+<p>&nbsp;</p>
+<ul><li>In Orchestrator go to&nbsp;<strong>Machines,&nbsp;</strong>click&nbsp;<strong>Add</strong>&nbsp;and then select <strong>Standard Machine</strong>. The<strong>&nbsp;Provision A Standard Machine&nbsp;</strong>page is displayed.</li>
+<li>Then access the robot interface by right-clicking the<strong>&nbsp;UI</strong>&nbsp;Icon on the Taskbar. Select <strong>Settings...</strong>&nbsp;Additionally, allow the robot to make changes if a window requesting that is displayed.&nbsp;</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/88925/practice2_first.png" alt="" width="400" height="237"></p>
+<p>Note: If you can’t find the icon, make sure the service is running. <a href="https://robot.uipath.com/docs/introduction">Click here</a> to see the instructions.&nbsp;</p>
+<ul><li>The <strong>Robot Settings</strong> window is displayed. Copy the <strong>Machine Name&nbsp;</strong>and leave the window open.</li>
+</ul><p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/88925/practice_2_second.png" alt="" width="500" height="346"></p>
+<p>&nbsp;</p>
+<ul><li>Go back to Orchestrator tab, paste the machine name in the&nbsp;<strong>Name</strong> field and hit <strong>Provision</strong>.</li>
+<li>For the newly created machine click&nbsp;on&nbsp;<strong>View&nbsp;</strong>and copy the machine key to clipboard.</li>
+<li>Go to&nbsp;<strong>Robots</strong>, click <strong>Add&nbsp;</strong>and select&nbsp;<strong>Standard Robot</strong>.&nbsp;</li>
+<li>Select the&nbsp;<strong>Machine</strong> created earlier, then&nbsp;in the <strong>Name</strong> field enter a suggestive name that enables you to properly identify and handle the robot instance later.</li>
+</ul><p>Note: Make sure you follow good naming principles, to avoid robot mismanagement when multiple robots are added.</p>
+<ul><li>In the <strong>Domain\Username</strong> and <strong>Password</strong> fields, enter the Windows credentials of your personal machine. If you don't know your domain\username open a Command Prompt and type <em>whoami</em>.</li>
+<li>Select the <strong>Development&nbsp;</strong>robot type from the <strong>Type</strong> drop-down list and hit&nbsp;<strong>Create</strong>.</li>
+</ul><p>Note: To take advantage of the High Density Robots feature, select the <strong>Create another</strong> check box. The&nbsp;option enables you to add multiple robots to the same machine if the Windows instance allows it, i.e. if the Windows Server is used. For more information about High Density Robots, see <a href="https://robot.uipath.com/docs/about-high-density-robots" target="_blank" rel="noreferrer">this article</a>.&nbsp;</p>
+<ul><li>Go to&nbsp;<strong>Robot Settings&nbsp;</strong>window and paste the key copied from Orchestrator in the <strong>Machine&nbsp;key </strong>field.</li>
+<li>Copy the Orchestrator URL and paste it in the <strong>Robot Settings</strong> window, in the corresponding field and click <strong>Connect</strong>.</li>
+<li>Congratulations! The robot should now be visible under the <strong>Robots </strong>section, with the Available status.</li>
+</ul><p>For more information about connecting the robot to Orchestrator you can see&nbsp;<a href="https://robot.uipath.com/docs/from-orchestrator-and-the-robot-settings-window" target="_blank" rel="noreferrer">this article</a>.</p>
+<p><img style="display:block;margin-left:auto;margin-right:auto;" src="https://d36spl5w3z9i0o.cloudfront.net/files/u/i/uipath_docebosaas_com/userfiles/88925/practice2_third.png" alt="" width="700" height="493"></p>
+<p>&nbsp;</p></body></html>
