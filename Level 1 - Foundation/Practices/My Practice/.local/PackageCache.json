@@ -2,22 +2,6 @@
   "Packages": [
     {
       "Package": {
-        "Id": "UiPath.Mail.Activities",
-        "Version": "1.3.0"
-      },
-      "Assemblies": [
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\bouncycastle/1.8.1\\lib/BouncyCastle.Crypto.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\microsoft.exchange.webservices/2.2.0\\lib/40/Microsoft.Exchange.WebServices.Auth.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\microsoft.exchange.webservices/2.2.0\\lib/40/Microsoft.Exchange.WebServices.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/MailKit.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/MimeKit.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/UiPath.Mail.Activities.Design.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/UiPath.Mail.Activities.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/UiPath.Mail.dll"
-      ]
-    },
-    {
-      "Package": {
         "Id": "UiPath.Excel.Activities",
         "Version": "2.5.2"
       },
@@ -38,6 +22,22 @@
     },
     {
       "Package": {
+        "Id": "UiPath.Mail.Activities",
+        "Version": "1.3.0"
+      },
+      "Assemblies": [
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\bouncycastle/1.8.1\\lib/BouncyCastle.Crypto.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\microsoft.exchange.webservices/2.2.0\\lib/40/Microsoft.Exchange.WebServices.Auth.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\microsoft.exchange.webservices/2.2.0\\lib/40/Microsoft.Exchange.WebServices.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/MailKit.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/MimeKit.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/UiPath.Mail.Activities.Design.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/UiPath.Mail.Activities.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.mail.activities/1.3.0\\lib/net452/UiPath.Mail.dll"
+      ]
+    },
+    {
+      "Package": {
         "Id": "UiPath.PDF.Activities",
         "Version": "1.3.1"
       },
@@ -46,47 +46,6 @@
         "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.pdf.activities/1.3.1\\lib/net452/UiPath.PDF.Activities.dll",
         "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.pdf.activities/1.3.1\\lib/net452/UiPath.PDF.dll",
         "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.pdf.activities/1.3.1\\lib/net452/x86/pdfium.dll"
-      ]
-    },
-    {
-      "Package": {
-        "Id": "UiPath.UIAutomation.Activities",
-        "Version": "19.3.0"
-      },
-      "Assemblies": [
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\avalonedit/5.0.3\\lib/Net40/ICSharpCode.AvalonEdit.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.DataGrid.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.Toolkit.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\humanizer.core/2.4.2\\lib/netstandard2.0/Humanizer.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath/10.0.7004.31775\\lib/UiPath.Interop.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Docking.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Editors.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Ribbon.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Shared.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.SyntaxEditor.Addons.DotNet.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.SyntaxEditor.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Text.Addons.DotNet.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Text.LLParser.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Text.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Wizard.Wpf.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/UiPath.UIAutomation.Activities.Design.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/UiPath.UiAutomation.Activities.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/UiPath.Wizards.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AbbyyCloud.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AbbyyFRE11.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AbbyyFRE12.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AbbyyFRECommon.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AzureComputerVision.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.Core.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.GoogleCloud.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.Microsoft.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.MicrosoftCloud.dll",
-        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.Tesseract.dll"
       ]
     },
     {
@@ -110,6 +69,47 @@
         "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.system.activities/19.3.0\\lib/net461/UiPath.OrchestratorClient.dll",
         "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.system.activities/19.3.0\\lib/net461/UiPath.System.Activities.Design.dll",
         "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.system.activities/19.3.0\\lib/net461/UiPath.System.Activities.dll"
+      ]
+    },
+    {
+      "Package": {
+        "Id": "UiPath.UIAutomation.Activities",
+        "Version": "19.3.0"
+      },
+      "Assemblies": [
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\avalonedit/5.0.3\\lib/Net40/ICSharpCode.AvalonEdit.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.DataGrid.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\extended.wpf.toolkit/2.8.0\\lib/net40/Xceed.Wpf.Toolkit.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\humanizer.core/2.4.2\\lib/netstandard2.0/Humanizer.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath/10.0.7004.31775\\lib/UiPath.Interop.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Docking.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Editors.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Ribbon.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Shared.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.SyntaxEditor.Addons.DotNet.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.SyntaxEditor.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Text.Addons.DotNet.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Text.LLParser.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Text.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/ActiproSoftware.Wizard.Wpf.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/UiPath.UIAutomation.Activities.Design.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/UiPath.UiAutomation.Activities.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.uiautomation.activities/19.3.0\\lib/net461/UiPath.Wizards.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AbbyyCloud.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AbbyyFRE11.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AbbyyFRE12.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AbbyyFRECommon.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.AzureComputerVision.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.Core.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.GoogleCloud.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.Microsoft.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.MicrosoftCloud.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.Tesseract.dll",
+        "C:\\Users\\amanda.pan\\.nuget\\packages\\uipath.vision/1.4.0\\lib/net452/UiPath.Vision.dll"
       ]
     }
   ],

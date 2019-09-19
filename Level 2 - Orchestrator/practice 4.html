@@ -1,0 +1,158 @@
+<html>
+
+<head>
+    <script>
+        var listener = function (e) {
+            if (e.data.action === 'setHtmlContent') {
+                var style = document.createElement('style');
+                style.type = 'text/css';
+                style.innerHTML = e.data.payload.customCss;
+
+                document.getElementsByTagName('head')[0].appendChild(style);
+                document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+            }
+        };
+
+        window.addEventListener('message', listener, false);
+        window.parent.postMessage('setHtmlContent.ready', '*');
+    </script>
+    <style type="text/css">
+        body {
+            font-family: "Open Sans", sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
+        @import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');
+
+        body {
+            font-size: 16px;
+            line-height: 1.5;
+            background-color: #FFFFFF;
+            color: #808080;
+            font-family: 'Lato', sans-serif !important;
+            padding: 20px;
+        }
+
+        p {
+            font-family: 'Lato', sans-serif !important;
+            font-size: 16px;
+            line-height: 1.0;
+            word-break: break-word;
+            margin-bottom: 2.0em;
+        }
+
+        span {
+            font-family: 'Lato', sans-serif !important;
+        }
+
+        li {
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+            line-height: 1.0;
+            word-break: break-word;
+            margin-bottom: 1.5em;
+        }
+
+        a:link {
+            color: #555555;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #5EC1EA;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: #2F549C;
+            text-decoration: none;
+        }
+
+        h1 {
+            color: #2F549C;
+            font-weight: 900;
+            margin-bottom: .99rem;
+            font-size: 28px;
+            line-height: 34px;
+        }
+
+        h2 {
+            color: #2F549C;
+            font-weight: 800;
+            font-size: 24px;
+            text-align: left;
+            *letter-spacing: 1px;
+            *
+        }
+
+        h3 {
+            color: #2F549C;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        h4 {
+            color: #808080;
+            font-weight: 400;
+            margin-bottom: .99rem;
+            font-size: 18px;
+            line-height: 20px;
+            margin-bottom: 2.0em;
+        }
+
+        h5 {
+            color: #808080;
+            font-weight: 600;
+            font-size: 20px;
+            text-align: left;
+            *letter-spacing: 1px;
+            *
+        }
+
+        div {
+            text-align: justify;
+        }
+
+        .flowplayer .fp-subtitle p {
+            background-color: rgba(0, 0, 0, 0) !important;
+            color: white !important;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important;
+        }
+
+        #document .body {
+            background-color: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color:#2f549c;font-size:28px;font-family:Lato, sans-serif;">Publishing&nbsp;the same&nbsp;process</h1>
+    <p>&nbsp;</p>
+    <h3><strong>Managing multiple versions of the same process</strong></h3>
+    <ul>
+        <li>In UiPath Studio, change the string in the <strong>Message Box</strong> activity from “Hello UiPath
+            Orchestrator!” to “Hi World!”.</li>
+        <li>Run the process to check if it displays the correct message on the screen.</li>
+        <li>Click <strong>Publish</strong>.</li>
+        <li>In Orchestrator, open the <strong>Processes</strong> page and navigate to <strong>Packages</strong>. The
+            package list is displayed.</li>
+        <li>Find the OrchestratorHelloWorld package, and click <strong>View Versions</strong>. Two versions of the
+            package are displayed - an active and an inactive one. The active one is the one you started manually, and
+            the inactive one is the one you have just published.</li>
+    </ul>
+    <p>There is another way you can send a package to Orchestrator.</p>
+    <p>If the robot instance is not connected to Orchestrator, the package has to be uploaded manually.</p>
+    <ul>
+        <li>Publish a package in Studio. The package is sent to a local folder.</li>
+        <li>Go to the <strong>Packages</strong> section in Orchestrator and click on <strong>Upload. </strong>The
+            <strong>Upload Package</strong> window is displayed.</li>
+        <li>Browse for the OrchestratorHelloWorld.nupkg file<strong>, </strong>which is saved in
+            C:\ProgramData\UiPath\Packages by default.</li>
+        <li>Click <strong>Upload </strong>to add the package to Orchestrator.</li>
+    </ul>
+    <p>The process now contains all its versions listed in chronological order, from the first published one to the
+        last.</p>
+</body>
+
+</html>
