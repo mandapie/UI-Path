@@ -1,0 +1,104 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1 style="color:#2f549c;font-size:28px;font-family:Lato, sans-serif;">Assets and credentials practice</h1>
+<p>&nbsp;</p>
+<p>Assets are pieces of information that Robots can access from Orchestrator.</p>
+<p>To create an asset, go to the <strong>Assets </strong>page and click the <strong>Add</strong> button. There are 4 types of assets with 2 corresponding Studio activities. The four types of assets are <strong>Text</strong>, <strong>Bool</strong>,<strong> Integer&nbsp;</strong>and <strong>Credential</strong>. You can configure their name and value(s).</p>
+<p>For credentials, you can create the username and password values. This is the only time the password characters are visible.&nbsp;</p>
+<p>Retrieving Assets in Studio</p>
+<ol><li>
+<p>Open Orchestrator and go to the <strong>Assets</strong> section.</p>
+</li>
+<li>
+<p>Press the <strong>Add</strong> button to create a new asset.</p>
+</li>
+<li>
+<p>Fill in the <strong>Title</strong> field by typing a name, such as “Message”.</p>
+</li>
+<li>
+<p>Press on the <strong>Type</strong> drop-down box and select <strong>Text</strong>. This is a String asset.</p>
+</li>
+<li>
+<p>Press on the <strong>Value</strong> field and type “Hello” followed by your name.</p>
+</li>
+<li>
+<p>Open Studio. Drag and drop a <strong>Get Asset</strong> activity on the <strong>Designer</strong> panel.</p>
+</li>
+<li>
+<p>Fill in the <strong>AssetName</strong> field by entering the value of your asset, namely “Message”.</p>
+</li>
+<li>
+<p>Click on the <strong>Value</strong> field and press Ctrl + K to create a new variable.</p>
+</li>
+<li>
+<p>Type a suggestive name, such as “Text”, and hit Enter</p>
+</li>
+<li>
+<p>Click the <strong>Message Box </strong>activity. Enter the variable created during steps 8 and 9 in the <strong>Value</strong> field.</p>
+</li>
+<li>
+<p>Press <strong>Run</strong>.</p>
+</li>
+</ol><p>Notice how the Asset value was retrieved from Orchestrator and used in Studio.</p>
+<p>Go back to Orchestrator and modify the asset’s value. Notice the difference when you run the process in Studio again.</p>
+<p>Experiment with various types and variables and see how they change.</p>
+<p>Retrieving Credentials in Studio</p>
+<p>The <strong>Get credential</strong> activity is used to retrieve data in a secure manner.</p>
+<ol><li>
+<p>Navigate to the <strong>Assets</strong> section in Orchestrator and click the <strong>Add </strong>button. The <strong>Add Asset</strong> page is displayed.</p>
+</li>
+<li>
+<p>Fill in the <strong>Name</strong> field by entering a suggestive name.</p>
+</li>
+<li>
+<p>Click the <strong>Type</strong> drop-down box and select <strong>Credentials</strong>.</p>
+</li>
+<li>
+<p>Fill in the <strong>Username </strong>and <strong>Password</strong> fields by entering some values. They do not need to be real.</p>
+</li>
+<li>
+<p>Open Studio.</p>
+</li>
+<li>
+<p>Drag and drop a <strong>Get Credential</strong> activity on the <strong>Designer</strong> panel.</p>
+</li>
+<li>
+<p>Click the <strong>Username</strong> field and press Ctrl + K to create a new variable.</p>
+</li>
+<li>
+<p>Type a suggestive name in the <strong>SetName</strong> field and press Enter.</p>
+</li>
+<li>
+<p>Click the <strong>Password</strong> field and press Ctrl + K to create a new variable.</p>
+</li>
+<li>
+<p>Type a suggestive name in the <strong>SetName</strong> field and press Enter.</p>
+</li>
+<li>
+<p>Drag a <strong>Message Box</strong> activity to the <strong>Designer</strong> panel.</p>
+</li>
+<li>
+<p>Click the <strong>Content </strong>field and enter the variable created during steps 8 and 9.</p>
+</li>
+<li>
+<p>Press <strong>Run</strong>.</p>
+</li>
+</ol><p>However, if you try to display the password, you will get an error - Type mismatch. That happens because the Password is stored as a SecureString type, a special .NET variable type that allows to secure data inside the program.</p>
+<p><br>To decrypt the text, you will need the <strong>Type Secure Text</strong> activity. This works similarly to a <strong>Type Into</strong> activity, but it takes a SecureString input and decrypts it only within the activity at hand. This is a great way to ensure the security of your data, by having a single point of contact for your credential storage.</p></body></html>

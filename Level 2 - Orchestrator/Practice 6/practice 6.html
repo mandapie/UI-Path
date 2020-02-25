@@ -1,0 +1,26 @@
+<html><head><script>
+    var listener = function (e) {
+        if (e.data.action === 'setHtmlContent') {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.innerHTML = e.data.payload.customCss;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('body')[0].innerHTML = e.data.payload.content;
+        }
+    };
+
+    window.addEventListener('message', listener, false);
+    window.parent.postMessage('setHtmlContent.ready', '*');
+</script><style type="text/css">
+        body{
+            font-family: "Open Sans", sans-serif;
+        }
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');body {font-size: 16px;line-height: 1.5;background-color: #FFFFFF;color: #808080;font-family: 'Lato', sans-serif !important; padding: 20px;}p {font-family: 'Lato', sans-serif !important; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 2.0em;}span {font-family: 'Lato', sans-serif !important; }li {font-family: 'Lato', sans-serif; font-size: 16px;line-height: 1.0;word-break: break-word;margin-bottom: 1.5em;}a:link { color: #555555; text-decoration: none;}a:hover { color: #5EC1EA; text-decoration: none;}a:visited { color: #2F549C; text-decoration: none;}h1 { color: #2F549C; font-weight: 900; margin-bottom: .99rem; font-size: 28px; line-height: 34px;}h2 { color: #2F549C; font-weight: 800; font-size: 24px; text-align: left; *letter-spacing: 1px;*}h3 { color: #2F549C; font-size: 16px; font-weight: 600; text-align: left;}h4 { color: #808080; font-weight: 400; margin-bottom: .99rem; font-size: 18px; line-height: 20px; margin-bottom: 2.0em;}h5 { color: #808080; font-weight: 600; font-size: 20px; text-align: left; *letter-spacing: 1px;*}div { text-align: justify;}.flowplayer .fp-subtitle p { background-color: rgba(0,0,0,0) !important; color: white !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important; }
+#document .body {background-color: none;}</style></head><body><h1 style="color:#2f549c;font-size:28px;font-family:Lato, sans-serif;">Schedules</h1>
+<p>Scheduling a process is just like having Orchestrator press <strong>Start&nbsp;</strong>for you at a time which you specify.</p>
+<p>Go to the <strong>Schedules </strong>page and create a new schedule. Identify your process (OrchestratorHelloWorld_DemoEnvironment) and try some of the options out. As shown in the video, you can instruct your process to start or stop either every couple of minutes, at a certain time, or on certain days.</p>
+<p>The<strong> Execution Target</strong> section enables you to pick the Robots to run the process. All available robots, specific robots or a dynamically number of robots in that environment can execute it.</p>
+<p>Notice the <strong>Stop Job after</strong>&nbsp;and <strong>Disable Schedule at&nbsp;</strong>from Actions tab.&nbsp;The<strong> Stop Job after&nbsp;</strong>property features the same two options - <strong>Stop&nbsp;</strong>&amp; <strong>Kill</strong>.</p>
+<p>Spend a couple of minutes playing with various schedules. Create some examples, play them one after the other, create new packages or processes, and pay attention to the order in which they are executed.</p>
+<p>&nbsp;</p></body></html>
